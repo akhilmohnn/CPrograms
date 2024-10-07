@@ -9,7 +9,7 @@ float weight;
 };
 
 int main(){
-
+  
 struct person *ptr;
 int i,n;
 
