@@ -2,7 +2,6 @@
 
 struct employee{
 
-
 int empid;
 char empname[20];
 int age;
