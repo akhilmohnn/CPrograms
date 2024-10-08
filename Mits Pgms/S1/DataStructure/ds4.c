@@ -31,3 +31,5 @@ printf("Name :%s\nAge:%d\n",(ptr+i)->name,(ptr+i)->age);
 }
 }
 
+
+
