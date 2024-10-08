@@ -9,7 +9,6 @@ float salary;
 }emp;
 
 int main(){
-
 struct employee *ptr;
 
 ptr=&emp;
