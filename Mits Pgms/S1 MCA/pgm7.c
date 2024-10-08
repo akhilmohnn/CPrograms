@@ -1,10 +1,13 @@
 #include<stdio.h>
-void main()
-{
+
+int main(){
+
 int a;
-printf("enter a value");
+printf("Enter a number");
 scanf("%d",&a);
-printf("left shift two :%d\n",a<<2);
-printf("left shift three :%d\n",a<<3);
-printf("left shift four :%d\n",a<<4);
+
+printf("Left shift by two: %d\n",a<<2);
+printf("Left shift by three: %d\n",a<<3);
+printf("Left shift by four: %d\n",a<<4);
+
 }

@@ -1,9 +1,14 @@
 #include<stdio.h>
-void main()
-{
+
+void main(){
+
 int a,b,l;
-printf("input the numbers:");
+
+printf("Enter two numbers");
 scanf("%d%d",&a,&b);
+
 l=(a>b)?a:b;
-printf("larger number is: %d",l);
+
+printf("largest number is:%d\n",l);
+
 }

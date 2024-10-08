@@ -1,11 +1,19 @@
-#include<stdio.h>
-void main()
-{
-int a;
-printf("enter a value");
-scanf("%d",&a);
-printf("pre increment :%d\n",++a);
-printf("pre decrement :%d\n",--a);
-printf("post increment :%d\n",a++);
-printf("post decrement :%d\n",a--);
+#include <stdio.h>
+
+int main() {
+    int n;
+    
+    printf("Enter number: ");
+    scanf("%d", &n);
+    printf("After prefix increment A is: %d\n", ++n);
+    printf("After postfix increment A is: %d\n", n++);
+    
+    // After postfix increment, n was incremented, so decrementing
+    n--;
+   
+    printf("After prefix decrement A is: %d\n", --n);
+    printf("After postfix decrement A is: %d\n", n--);
+   
+    return 0;
 }
+
