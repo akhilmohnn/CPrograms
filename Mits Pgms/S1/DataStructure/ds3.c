@@ -31,3 +31,4 @@ printf("Book Author:%s\n",ptr->author);
 printf("Book ISBN:%s\n",ptr->ISBN);
 printf("Year of publish:%d\n",ptr->year);
 }
+
