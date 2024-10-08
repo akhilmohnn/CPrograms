@@ -11,7 +11,6 @@ int year;
 int main(){
 
 ptr=&b1;
-
 //reading and printing using the membership operator
 printf("Enter the title:");
 scanf("%s",ptr->title);
