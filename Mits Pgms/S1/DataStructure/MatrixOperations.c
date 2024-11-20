@@ -2,6 +2,17 @@
 
 #define MAX 5
 
+
+int readMatrix(int matrix[MAX][MAX],int rows,int cols){
+    printf("Enter the elements of matrix (%d x %d)",rows,cols);
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            printf("Element [%d][%d]:",i+1,j+1);
+            scanf("%d",&matrix[i][j]);
+        }
+    }
+}
+
 int main(){
     int rows1,cols1,rows2,cols2,ch;
     int matrix1[MAX][MAX],matrix2[MAX][MAX],result[MAX][MAX];
