@@ -13,6 +13,15 @@ int readMatrix(int matrix[MAX][MAX],int rows,int cols){
     }
 }
 
+int displayMatrix(int matrix[MAX][MAX],rows,cols){
+    printf("Matrix elements (%d x%d):\n",rows,cols);
+    for(int i=0;i<rows;i++){
+        for(int j=0;j<cols;j++){
+            printf("%d",matrix[i][j])
+        }
+    }
+}
+
 int main(){
     int rows1,cols1,rows2,cols2,ch;
     int matrix1[MAX][MAX],matrix2[MAX][MAX],result[MAX][MAX];
