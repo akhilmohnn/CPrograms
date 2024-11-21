@@ -47,8 +47,13 @@ int main(){
         scanf("%d",&ch);
 
         switch(ch){
-            case 1: if(rows1==1 && cols1==cols2)
-            readMatrix(matrix1,matrix2,result,rows,cols)
+            case 1: if(rows1==1 && cols1==cols2){
+
+                addMatrix(matrix1,matrix2,result,rows1,cols1);
+
+                
+            }
+            
         }
     }
 
