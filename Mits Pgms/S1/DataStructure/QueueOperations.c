@@ -1,88 +1,96 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-#define SIZE 5  
-// Define the maximum size of the queue
+#define MAX 5
 
-int queue[SIZE];  
-int front = -1;   
-int rear = -1;    
+int queue[MAX];
+int front=-1;
+int rear=-1;
 
-// Function to check if the queue is full
-int isFull() {
-    return rear == SIZE - 1;
+int isFull(){
+    return rear==MAX-1;
 }
 
-// Function to check if the queue is empty
-int isEmpty() {
-    return front == -1 || front > rear;
+int isEmpty(){
+    return front==-1 || front>rear;
 }
 
-// Function to add an element to the queue (Enqueue)
-void Enqueue(int ITEM) {
-    if (isFull()) {
-        printf("Queue is full! Cannot enqueue %d\n", ITEM);
+void enqueue(int item){
+    if(isFull()){
+        printf("Queue is already full,try dequeuing!\n");
+        return; 
+    }
+
+    if(front==-1){
+        front=0;
+    }
+
+    rear++;
+    queue[rear]=item;
+    printf("%d enqueued to the queue\n",item);
+}
+
+int dequeue(){
+    if(isEmpty()){
+        printf("Cannot dequeue,already empty!!!\n");
+    }
+
+    int item=queue[front];
+    front++;
+    return item;
+
+}
+
+void displayQueue(){
+    if(isEmpty()){
+        printf("Queue is empty!");
         return;
     }
-    
-    if (front == -1) {
-        front = 0;  // If the queue is empty, set front to 0
+
+    printf("\nQueue elements are:");
+    for(int i=front;i<=rear;i++){
+        printf("%d ",queue[i]);
     }
-    
-    rear++;  // Increment the rear index
-    queue[rear] = ITEM;
-    printf("%d enqueued to queue\n", ITEM);
+    printf("\n");
 }
 
-// Function to remove an element from the queue (Dequeue)
-int Dequeue() {
-    if (isEmpty()) {
-        printf("Queue is empty! Cannot dequeue\n");
-        return -1;  // Return -1 to indicate queue underflow
-    }
+int main(){
+    int ch,item;
 
-    int ITEM = queue[front];
-    front++;  // Increment the front index
-    return ITEM;
-}
+    while(1){
+        printf("\nEnter the choice:\n");
+        printf("1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Peek element\n");
+        printf("4.Display queue\n");
+        printf("5.Exit\n");
+        printf("Enter your choice:");
+        scanf("%d",&ch);
 
-// Function to peek the front element of the queue
-int peek() {
-    if (isEmpty()) {
-        printf("Queue is empty! Cannot peek\n");
-        return -1;  // Return -1 if queue is empty
-    }
-    return queue[front];  // Return the front element without removing it
-}
-
-int main() {
-    // Enqueue elements onto the queue
-    Enqueue(10);
-    Enqueue(20);
-    Enqueue(30);
-    Enqueue(40);
-    Enqueue(50);
+    switch(ch)
+    {
+    case 1: printf("\nEnter the element to enqueue:");
+            scanf("%d",&item);
+            enqueue(item);
+            break;
     
-    // Attempt to enqueue when the queue is full
-    Enqueue(60);
+    case 2: item=dequeue();
+            if(item!=-1){
+                printf("%dDequeued from the queue",item);
+            }
+            break;
 
-    // Peek the front element
-    printf("Front element is %d\n", peek());
+    case 4: displayQueue();
+            break;        
 
-    // Dequeue elements from the queue
-    printf("%d dequeued from queue\n", Dequeue());
-    printf("%d dequeued from queue\n", Dequeue());
 
-    // Peek after dequeuing
-    printf("Front element is now %d\n", peek());
+    default: printf("Entered wrong choice!!!");
+        break;
+    }
 
-    // Dequeue all elements
-    Dequeue();
-    Dequeue();
-    Dequeue();
+    }
+    
 
-    // Attempt to dequeue when the queue is empty
-    Dequeue();
 
     return 0;
 }
