@@ -1,11 +1,9 @@
 #include <stdio.h>
 
 void sortArray(int arr[], int n) {
-    // Simple Bubble Sort for sorting the array
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
-                // Swap
                 int temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
@@ -17,43 +15,40 @@ void sortArray(int arr[], int n) {
 int linearSearch(int arr[], int n, int key) {
     for (int i = 0; i < n; i++) {
         if (arr[i] == key) {
-            return i;  // Return the index if the key is found
+            return i;
         }
     }
-    return -1; // Return -1 if the key is not found
+    return -1;
 }
 
 int binarySearch(int arr[], int n, int key) {
     int low = 0, high = n - 1;
     while (low <= high) {
         int mid = low + (high - low) / 2;
-
         if (arr[mid] == key) {
-            return mid; // Key found
+            return mid;
         } else if (arr[mid] < key) {
-            low = mid + 1; // Search the right half
+            low = mid + 1;
         } else {
-            high = mid - 1; // Search the left half
+            high = mid - 1;
         }
     }
-    return -1; // Return -1 if the key is not found
+    return -1;
 }
 
 int main() {
-    int arr[] = {34, 7, 23, 32, 5, 62}; // Example array
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int choice, key, result;
+    int n, choice, key, result;
 
-    // Sort the array before using binary search
-    sortArray(arr, n);
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
 
-    printf("Sorted Array: ");
+    int arr[n];
+
+    printf("Enter the elements:\n");
     for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
+        scanf("%d", &arr[i]);
     }
-    printf("\n");
 
-    // Menu for selecting search type
     printf("Choose search method:\n");
     printf("1. Linear Search\n");
     printf("2. Binary Search\n");
@@ -74,6 +69,12 @@ int main() {
             break;
 
         case 2:
+            sortArray(arr, n);
+            printf("Sorted Array: ");
+            for (int i = 0; i < n; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
             result = binarySearch(arr, n, key);
             if (result != -1) {
                 printf("Key found at index %d using Binary Search.\n", result);
