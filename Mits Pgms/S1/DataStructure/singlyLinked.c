@@ -1,48 +1,121 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-struct Node {
-    int data;
-    struct Node* next;
+int count=0;
+struct node *start;
+void create();
+void display();
+void insertBeg();
+
+
+struct node{
+int data;
+struct node *next;
 };
 
-int main() {
-    struct Node* head = NULL;
-    struct Node* temp = NULL;
-    struct Node* newNode = NULL;
-    int n, value;
+void create(){
 
-    printf("Enter the number of nodes: ");
-    scanf("%d", &n);
+int n,item,i=0;
+struct node *ptr,*temp;
 
-    for (int i = 0; i < n; i++) {
-        // Allocate memory for a new node and get value from the user
-        newNode = (struct Node*)malloc(sizeof(struct Node));
-        printf("Enter value for node %d: ", i + 1);
-        scanf("%d", &value);
+if(count==0){
 
-        newNode->data = value;  // Set node data
-        newNode->next = NULL;   // Set next to NULL
+printf("Enter the number of nodes to insert:");
+scanf("%d",&n);
 
-        if (head == NULL) {
-            // First node becomes the head
-            head = newNode;
-        } else {
-            // Attach new node at the end of the list
-            temp->next = newNode;
-        }
-
-        temp = newNode;  // Update temp to point to the last node
-    }
-
-    // Display the linked list
-    printf("Linked List: ");
-    temp = head;
-    while (temp != NULL) {
-        printf("%d -> ", temp->data);
-        temp = temp->next;
-    }
-    printf("NULL\n");
-
-    return 0;
+  if(n==0){
+		printf("\nInvalid count\n");
+	}
+ 
+  else{
+  	
+  	while(i<n){
+  		
+  	  printf("Enter the value to insert");
+  	  scanf("%d",&item);
+  	  ptr=(struct node*)malloc(sizeof(struct node));
+  	  ptr->data=item;
+  	  if(count==0){
+  	  	start=ptr;
+  	  	start->next=NULL;
+  	  	count=1;
+  	  	i++;
+  	  	temp=start;
+  	  	}
+  	  else{
+ 		temp->next=ptr;
+ 		temp=temp->next;
+ 		i++; 	   
+  	   }	
+  	  }
+  	}
+  }
 }
+
+void insertBeg(){
+int data;
+struct node *ptr;
+	printf("Enter the item to insert:");
+	scanf("%d",&data);
+	ptr=(struct node*)malloc(sizeof(struct node));
+	ptr->data=data;
+	if(start==NULL){
+		start=ptr;
+		start->next=NULL;
+		}
+	else{
+	ptr->next=start;
+	start=ptr;
+	}		
+	}
+
+void display(){
+
+	struct node *ptr;
+	ptr=start;
+	if(ptr==NULL){
+	printf("Linked list is empty");
+	}
+	else{
+	printf("\n List is :");
+	while(ptr!=NULL){
+		printf("%d",ptr->data);
+		ptr=ptr->next;
+		if(ptr!=NULL){
+			printf("->");
+			}
+	}printf("->NULL");
+	printf("\n");
+	}
+
+}
+
+
+  int main(){
+ int choice;
+ while(1){
+ 
+ printf("\n1.Create a linked list\n2.Insert at beginning\n3.Insert at end\n4.Insert at specific\n5.Display linked list\n6.Exit\nEnter the choice:");
+ scanf("%d",&choice);
+ 
+ switch(choice){
+ 
+ 	case 1: create();
+ 			break;
+ 			
+ 	case 2: insertBeg();
+ 			break;
+ 			
+ 	case 5: display();
+ 			break;		
+ 
+     case 6: printf("Exiting!!!");
+     			return 0; 
+     
+     default : printf("Invalid choice!");	
+     		
+ }
+ 
+ }
+
+	}
