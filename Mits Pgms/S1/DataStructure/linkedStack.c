@@ -1,14 +1,4 @@
 
-
-Skip to content
-Using Muthoot Institute Of Technology and Science Mail with screen readers
-
-Conversations
- 
-Program Policies
-Powered by Google
-Last account activity: 10 hours ago
-Details
 #include<stdio.h>
 #include<stdlib.h>
 void push(void);
@@ -113,5 +103,4 @@ void display()
 	}printf("NULL");
 	}
 }
-linkedstack.c
-Displaying linkedstack.c.
+
