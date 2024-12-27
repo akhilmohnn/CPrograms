@@ -69,6 +69,32 @@ void display() {
     }
 }
 
+void reverseDisplay() {
+    struct node *ptr = head;
+
+    if (ptr == NULL) {
+        printf("Empty\n");
+    } else {
+        // Traverse to the last node
+        while (ptr->next != NULL) {
+            ptr = ptr->next;
+        }
+
+        printf("Elements in reverse are:");
+        while (ptr->prev != NULL) {
+            printf(" %d", ptr->data);
+            ptr = ptr->prev;
+
+            if (ptr->prev != NULL) {
+                printf(" <-> "); 
+            } else {
+                printf(" <-> NULL\n");
+            }
+        }
+    }
+}
+
+
 void countNew() {
     struct node *ptr = head;
     int countNew = 0;
@@ -88,5 +114,6 @@ int main() {
     create();
     display();
     countNew();
+    reverseDisplay();
     return 0;
 }
