@@ -181,6 +181,46 @@ void insertEnd(){
     }
 }
 
+void deleteBeg(){
+    struct node *temp;
+    
+    if(head==NULL){
+        printf("Not possible");
+    }
+    
+    temp=head;
+    head=head->next;
+    if(head!=NULL){
+        head->prev=NULL;
+    }
+    free(temp);
+    printf("\nAfter first node deletion:\t");
+    display();
+}
+
+void deleteEnd(){
+    struct node *temp;
+    
+    temp=head;
+    
+    if(temp==NULL){
+        printf("Already empty");
+    }
+    else{
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        if(temp->prev!=NULL){
+            temp->prev->next=NULL;
+        }
+        else{
+            head=NULL;
+        }
+        free(temp);
+        printf("\nAfter last node deletion:\t");
+        display();
+    }
+}
 
 int main() {
     create();  //create a list containing 20
@@ -191,5 +231,6 @@ int main() {
     return 0;
     insertBeg();
     insertEnd();
-
+    deleteBeg();
+    deleteEnd();
 }
