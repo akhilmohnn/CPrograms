@@ -110,10 +110,33 @@ void countNew() {
     }
 }
 
+void searchItem(int item){
+    struct node *ptr=head;
+    int nodeCount=1;
+
+    if(ptr==NULL){
+        printf("Not exists");
+    }
+    else{
+        while(ptr->next!=NULL){
+
+        if(ptr->data==item){
+            printf("\nItem is found at : %d",nodeCount);
+        }    
+
+        ptr=ptr->next;
+            nodeCount++;    
+
+        
+    }
+    }
+}
+
 int main() {
-    create();
+    create();  //create a list containing 20
     display();
     countNew();
     reverseDisplay();
+    searchItem(20);  //20 is passed to function
     return 0;
 }
