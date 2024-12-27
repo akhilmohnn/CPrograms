@@ -132,6 +132,56 @@ void searchItem(int item){
     }
 }
 
+void insertBeg(){
+    int item;
+    struct node *ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    printf("\nEnter the item to insertBeg:");
+    scanf("%d",&item);
+    
+    ptr->data=item;
+    ptr->prev=NULL;
+    ptr->next=head;
+    
+    if(head!=NULL){
+        head->prev=ptr;
+    }
+    
+    head=ptr;
+    printf("Linked L. after insertBeg:\t");
+    display();
+    
+}
+
+void insertEnd(){
+    
+    int data;
+    struct node *ptr,*temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("\nEnter the item to insertEnd:");
+    scanf("%d",&data);
+    temp->data=data;
+    temp->next=NULL;
+    
+    ptr=head;
+    
+    if(ptr==NULL){
+        temp->prev=NULL;
+        head=temp;
+    }
+    else{
+        
+        while(ptr->next!=NULL){
+        ptr=ptr->next;
+    }
+    ptr->next=temp;
+    temp->prev=ptr;
+    printf("LL after insertEnd:\t");
+    display();
+    }
+}
+
+
 int main() {
     create();  //create a list containing 20
     display();
@@ -139,4 +189,7 @@ int main() {
     reverseDisplay();
     searchItem(20);  //20 is passed to function
     return 0;
+    insertBeg();
+    insertEnd();
+
 }
