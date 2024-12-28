@@ -47,7 +47,8 @@ void pop(){
 	int x=temp->data;
 
 	head=head->next;
-
+	
+	free(temp);
 	currentSize--;
 	printf("%d deleted from stack",x);
 	
@@ -62,7 +63,7 @@ void display(){
 	}
 	printf("Elements are:\t");
 	while(temp!=NULL){
-		printf("%d->",temp->data);
+		printf("%d\n",temp->data);
 		temp=temp->next;
 	}
 	printf("NULL");
