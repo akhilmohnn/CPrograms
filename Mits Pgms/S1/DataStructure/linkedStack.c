@@ -1,106 +1,90 @@
-
 #include<stdio.h>
 #include<stdlib.h>
-void push(void);
-void pop(void);
-void display(void);
+
 struct node{
-    int data;
-    struct node *next;
+	int data;
+	struct node *next;
 };
+
 struct node *head=NULL;
-void main(){
-    int ch;
-    do{
-        printf("\n\n1.Push\n2.Pop\n3.Traverse\n4.Exit");
-        printf("\nEnter your choice: ");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-            case 1:
-                push();
-                break;
-            case 2:
-                pop();
-                break;
-            case 3:
-                display();
-                break;
-            case 4:
-        	break;
-        }
-        }while(ch!=4);
-}
-void push()
-{	
-	struct node *newnode;
-	int val;
-	newnode=(struct node*)malloc(sizeof(struct node));
-	printf("\nEnter the value to be inserted: ");
-	scanf("%d",&val);
-	newnode->data=val;
-	newnode->next=NULL;
-	if(head==NULL)
-	{
-		head=newnode;
+int currentSize=0;
+int maxSize=0;
+
+void push(){
+	if(currentSize>=maxSize){
+		printf("stack overflow!");
+		return;
 	}
-	else
-	{
-		struct node *ptr;
-		ptr=head;
-		while(ptr->next!=NULL)
-		{
-			ptr=ptr->next;
-		}
-	ptr->next=newnode;
+
+	int item;
+	struct node *temp;
+	temp=(struct node*)malloc(sizeof(struct node));
+
+	if(temp==NULL){
+		printf("Memory allocation failed!");
+		return;
 	}
-	printf("\nSuccesfull");
-}
-void pop()
-{
-	struct node *ptr,*ptr1;
-	int x;
-	if(head==NULL)
-	{
-		printf("\nUnderflow!!!");
-	}
-	else
-	{
-		if(head -> next == NULL)
-		{
-		 head = NULL;
-		free(head);
-		}
-		else
-		{
-			ptr=head;
-			while(ptr->next!=NULL)
-			{
-				ptr1=ptr;
-				ptr=ptr->next;
-			}
-			x=ptr->data;
-			printf("\n%d (top of stack) deleted succesfully",x);
-			free(ptr);
-			ptr1->next=NULL;
-		}
-	}
-}
-void display()
-{
-	struct node *ptr;
-	if(head==NULL)
-		{
-			printf("\nList empty!!!");
-		}
-	else
-	{
-		ptr=head;
-	while(ptr!=NULL)
-	{
-		printf("%d-> ",ptr->data);
-		ptr=ptr->next;
-	}printf("NULL");
-	}
+
+	printf("\nEnter the item to insert:");
+	scanf("%d",&item);
+	temp->data=item;
+	int x=temp->data;
+	temp->next=head;
+	head=temp;
+
+	currentSize++;
+	printf("%d pushed to stack",x);
 }
 
+void pop(){
+	if(currentSize==0){
+		printf("Stack is empty!");
+		return;
+	}
+
+	struct node *temp;
+	temp=head;
+	int x=temp->data;
+
+	head=head->next;
+
+	currentSize--;
+	printf("%d deleted from stack",x);
+	
+
+}
+
+void display(){
+	struct node *temp=head;
+
+	if(currentSize==0){
+		printf("Stack is empty");
+	}
+	printf("Elements are:\t");
+	while(temp!=NULL){
+		printf("%d->",temp->data);
+		temp=temp->next;
+	}
+	printf("NULL");
+}
+
+int main(){
+	int ch;
+
+	printf("\nEnter the stack size:");
+	scanf("%d",&maxSize);
+
+	while(1){
+		printf("\n\n1.push\n2.pop\n3.Display\n4.exit");
+		printf("\nEnter the choice:\t");
+		scanf("%d",&ch);
+		switch(ch){
+			case 1: push(); break;
+			case 2: pop(); break;
+			case 3: display(); break;
+			case 4: printf("Exiting!");
+					return 0;
+			default: printf("Invalid choice!");		
+		}
+	}
+}
