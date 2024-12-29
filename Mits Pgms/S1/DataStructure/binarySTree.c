@@ -6,13 +6,14 @@ struct node {
     struct node *left, *right;
 };
 
-struct node* newNode(int item) {
+struct node* newNode(int key) {
     struct node* temp = (struct node*)malloc(sizeof(struct node));
-    temp->key = item;
+    temp->key = key;
     temp->left = temp->right = NULL;
     return temp;
 }
 
+// (left, root, right)
 void inorder(struct node* root) {
     if (root != NULL) {
         inorder(root->left);
@@ -21,6 +22,7 @@ void inorder(struct node* root) {
     }
 }
 
+// (root, left, right)
 void preorder(struct node* root) {
     if (root != NULL) {
         printf("%d ", root->key);
@@ -29,6 +31,7 @@ void preorder(struct node* root) {
     }
 }
 
+// (left, right, root)
 void postorder(struct node* root) {
     if (root != NULL) {
         postorder(root->left);
@@ -49,18 +52,54 @@ struct node* insert(struct node* node, int key) {
     return node;
 }
 
+struct node* findMin(struct node* root) {
+    while (root && root->left != NULL)
+        root = root->left;
+    return root;
+}
+
+struct node* deleteNode(struct node* root, int key) {
+    if (root == NULL)
+        return root;
+
+    if (key < root->key) {
+        root->left = deleteNode(root->left, key);
+    } else if (key > root->key) {
+        root->right = deleteNode(root->right, key);
+    } else {
+        // Node with only one child or no child
+        if (root->left == NULL) {
+            struct node* temp = root->right;
+            free(root);
+            return temp;
+            
+        } else if (root->right == NULL) {
+            struct node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        //node with 2 child: inorder successor
+        struct node* temp = findMin(root->right);
+        root->key = temp->key; //that node replaced
+        root->right = deleteNode(root->right, temp->key);  //after replacement,the inorder successor key deleted
+    }
+    return root;
+}
+
 int main() {
     struct node* root = NULL;
     int choice, element;
 
-    printf("Choose Operation:\n");
+    printf("Binary Search Tree Operations:\n");
 
     while (1) {
         printf("\n1. Insert Element\n");
-        printf("2. Inorder Traversal (sorted order)\n");
-        printf("3. Preorder Traversal (root, left, right)\n");
-        printf("4. Postorder Traversal (left, right, root)\n");
-        printf("5. Exit\n");
+        printf("2. Delete Element\n");
+        printf("3. Inorder Traversal (sorted order)\n");
+        printf("4. Preorder Traversal (root, left, right)\n");
+        printf("5. Postorder Traversal (left, right, root)\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -73,24 +112,31 @@ int main() {
                 break;
 
             case 2:
-                printf("Inorder Traversal: ");
-                inorder(root); 
-                printf("\n");
+                printf("Enter the element to delete: ");
+                scanf("%d", &element);
+                root = deleteNode(root, element);
+                printf("%d deleted from the BST (if it existed).\n", element);
                 break;
 
             case 3:
-                printf("Preorder Traversal: ");
-                preorder(root); 
+                printf("Inorder Traversal: ");
+                inorder(root);
                 printf("\n");
                 break;
 
             case 4:
-                printf("Postorder Traversal: ");
-                postorder(root); 
+                printf("Preorder Traversal: ");
+                preorder(root);
                 printf("\n");
                 break;
 
             case 5:
+                printf("Postorder Traversal: ");
+                postorder(root);
+                printf("\n");
+                break;
+
+            case 6:
                 printf("Exiting program. Goodbye!\n");
                 exit(0);
 
