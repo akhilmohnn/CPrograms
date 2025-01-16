@@ -41,6 +41,7 @@ scanf("%d",&n);
   	  scanf("%d",&item);
   	  ptr=(struct node*)malloc(sizeof(struct node));
   	  ptr->data=item;
+	  ptr->next=NULL;
   	  if(count==0){
   	  	start=ptr;
   	  	start->next=NULL;
